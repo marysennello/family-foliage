@@ -1,0 +1,22 @@
+[package]
+name = "family-foliage"
+version = "0.1.0"
+authors = ["Keith Feldman <keith@feldman.world>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+aws-config = "0.55.3"
+aws-sdk-dynamodb = "0.28.0"
+serde_dynamo = { version = "4", features = ["aws-sdk-dynamodb+0_28"] }
+axum = "0.6.18"
+hyper = { version = "0.14.27", features = ["full"] }
+lambda_http = "0.8.1"
+lambda_runtime = "0.8.1"
+serde_json = "1.0.100"
+tokio = { version = "1.29.0", features = ["full"] }
+tower = "0.4.13"
+tracing = "0.1.37"
+tracing-subscriber = "0.3.17"
+serde = "1.0.168"
