@@ -7,7 +7,7 @@
 //! of a basic `tower::Service` you get web framework niceties like routing, request component
 //! extraction, validation, etc.
 
-use aws_sdk_dynamodb::{Client, Error as OtherError};
+use aws_sdk_dynamodb::{types::AttributeValue, Client, Error as OtherError};
 use axum::{
     extract::Path,
     extract::State,
@@ -39,7 +39,9 @@ async fn get_tree_id(State(client): State<Client>, Path(id): Path<String>) -> Js
     let results = client
         .query()
         .table_name(TABLE_NAME)
-        .key_condition_expression(format!("#id = :{id}"))
+        .key_condition_expression(format!("#id = :id"))
+        .expression_attribute_names("#id", "id")
+        .expression_attribute_values(":id", AttributeValue::N(id))
         .send()
         .await
         .unwrap();
